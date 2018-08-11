@@ -4,7 +4,9 @@ const sass          = require('gulp-sass');
 const sourcemaps    = require('gulp-sourcemaps');
 const autoprefixer  = require('gulp-autoprefixer');
 const cleanCSS      = require('gulp-clean-css');
-const uglify        = require('gulp-uglifyes');
+const uglify        = require('gulp-uglify');
+const babel         = require('gulp-babel');
+const uglifyes      = require('gulp-uglifyes');
 
 
 
@@ -49,6 +51,9 @@ gulp.task('sass', ()=> {
 gulp.task('js', ()=> {
     return gulp.src('src/js/**/*.js')
         .pipe(uglify())
+        .pipe(babel({
+            presets: ['env']
+        }))
         .pipe(gulp.dest('public/js'))
         .pipe(browserSync.reload({
             stream: true
